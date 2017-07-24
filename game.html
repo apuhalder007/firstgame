@@ -31,7 +31,7 @@
 			moveElement();
 			drawRectElement(0, 0, canWdt, canHgt, "#000"); //Black Stage
 			drawRectElement(ballX, ballY, 10, 10, "#FFFFFF"); // ball 
-			drawRectElement(paddleX, (canHgt - 20), 100, 20, "#FFFFFF"); // paddle
+			drawRectElement(paddleX, (canHgt - 10), 100, 10, "#FFFFFF"); // paddle
 			context.fillStyle = "#FFFFFF"; 
 			context.fillText(scoreTxt,canWdt -100 ,50);
 
@@ -103,6 +103,7 @@
 		ballX = canWdt /2;
 		ballY = canHgt /2;
 		ballspeedY = ballspeedY - 5;
+		score = 0;
 	}
 </script>
 </body>
