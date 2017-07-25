@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>canvas</title>
+	<style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+</head>
+<body>
+<canvas height="400" width="800" id="game"  onmousemove="showCoords(event)"></canvas>
+<script type="text/javascript">
+	var canvas = document.getElementById('game');
+	var canHgt = canvas.height;
+	var canWdt = canvas.width;
+	var context = canvas.getContext("2d");
+	var ballX = 5;
+	var ballspeedX = 5;
+	var ballY = 5;
+	var ballspeedY = 5;
+	var paddleX = 0;
+
+	window.onload = function(){
+
+		setInterval(function(){
+			moveElement();
+			drawRectElement(0, 0, canWdt, canHgt, "#000"); //Black Stage
+			drawRectElement(ballX, ballY, 10, 10, "#FF0000"); // ball 
+			drawRectElement(paddleX, (canHgt - 20), 100, 20, "#FFFFFF"); // paddle 
+		},1000/30);
+
+		/*canvas.addEventListener("mouseover", function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        paddleX = mousePos.x;
+        console.log(evt.clientX);
+      }, false);
+      */
+		
+	}
+
+	function drawRectElement(xCord, yCord, xWidth , yHeight , color){
+		context.fillStyle = color;
+		context.fillRect(xCord, yCord, xWidth, yHeight);
+	} 
+
+	function moveElement(){
+		// move element on canvas
+		ballX = ballX + ballspeedX * 0.5;
+		ballY = ballY + ballspeedY;
+		if(ballX < 0){
+			ballspeedX = ballspeedX + 5;
+		}
+		if(ballX > canWdt){
+			ballspeedX = (ballspeedX - 5);
+		}
+			
+		if(ballY < 0){
+			ballspeedY = ballspeedY + 5;
+		}
+		if(ballY > canHgt){
+			ballspeedY = (ballspeedY - 5);
+		}
+	}
+
+	function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        console.log(rect);
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+
+    function showCoords(evt){
+
+    	paddleX = evt.clientX;
+  		console.log(
+    	"clientX value: " + evt.clientX + "\n"
+    	+ "clientY value: " + evt.clientY + "\n"
+  		);
+	}
+</script>
+</body>
+</html>
